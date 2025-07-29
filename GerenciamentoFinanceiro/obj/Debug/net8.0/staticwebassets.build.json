@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2fh0i4550AqBZVBz5dLkUzQJVqSSaYRtDLSvzze7/bQ=",
+  "Hash": "AgasEo2S2L6SKWoDLYRkavq1o66qMqcfP03awv7ylg8=",
   "Source": "GerenciamentoFinanceiro",
   "BasePath": "_content/GerenciamentoFinanceiro",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/GerenciamentoFinanceiro/obj/Debug/net8.0/scopedcss/projectbundle/GerenciamentoFinanceiro.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/GerenciamentoFinanceiro/wwwroot/css/brite.css",
+      "SourceId": "GerenciamentoFinanceiro",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/GerenciamentoFinanceiro/wwwroot/",
+      "BasePath": "_content/GerenciamentoFinanceiro",
+      "RelativePath": "css/brite.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/brite.css"
     },
     {
       "Identity": "/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/GerenciamentoFinanceiro/wwwroot/css/site.css",
