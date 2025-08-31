@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/gerenciamentoFinanceiro.bundle.scp.css"
     },
     {
+      "Id": "/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/wwwroot/css/brite.css",
+      "PackagePath": "staticwebassets/css/brite.css"
+    },
+    {
       "Id": "/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
