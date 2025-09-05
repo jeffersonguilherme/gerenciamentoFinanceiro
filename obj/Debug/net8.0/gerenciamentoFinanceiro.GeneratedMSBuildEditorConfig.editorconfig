@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro
 build_property._RazorSourceGeneratorDebug = 
 
+[/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/Views/Home/AdicionarTransacao.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BZGljaW9uYXJUcmFuc2FjYW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/jefferson/Documentos/GitHub/gerenciamentoFinanceiro/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
