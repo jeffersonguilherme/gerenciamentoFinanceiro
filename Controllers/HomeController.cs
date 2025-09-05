@@ -2,6 +2,7 @@ using gerenciamentoFinanceiro.Data;
 using gerenciamentoFinanceiro.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace gerenciamentoFinanceiro.Controllers;
 
@@ -55,8 +56,8 @@ public class HomeController : Controller
 
     public IActionResult AdicionarTransacao()
     {
-        ViewBag.Categoria = _context.Categorias.ToList();
-        ViewBag.Transacao = _context.Transacoes.ToList();
+        ViewBag.Categorias = _context.Categorias.ToList();
+        ViewBag.Transacoes = _context.Transacoes.ToList();
         return View();
     }
 
@@ -64,6 +65,32 @@ public class HomeController : Controller
     public IActionResult Filtrar(string[] filtro)
     {
         string id = string.Join("-", filtro);
-        return RedirectToAction("Index", new {ID= id});
+        return RedirectToAction("Index", new { ID = id });
+    }
+
+    [HttpPost]
+    public IActionResult AdicionarTransacao(Financeiro financeiro)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Financas.Add(financeiro);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            ViewBag.Categorias = _context.Categorias.ToList();
+            ViewBag.Transacoes = _context.Transacoes.ToList();
+            return View(financeiro);
+        }
+    }
+
+    public IActionResult RemoverTransacao(int id)
+    {
+        var financa = _context.Financas.Find(id);
+        _context.Remove(financa);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
     }
 }
