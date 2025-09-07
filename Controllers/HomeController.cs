@@ -2,7 +2,6 @@ using gerenciamentoFinanceiro.Data;
 using gerenciamentoFinanceiro.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace gerenciamentoFinanceiro.Controllers;
 
@@ -61,6 +60,53 @@ public class HomeController : Controller
         return View();
     }
 
+
+    public IActionResult SomatoriaValores()
+    {
+        var resultados = from g in _context.Financas
+                                            .Include(x => x.Categoria)
+                                            .Include(x => x.Transacao)
+                                            .ToList()
+                         group g by new { g.Categoria } into total
+                         select new
+                         {
+                             CategoriaNome = total.First().Categoria.Nome,
+                             TransacaoNome = total.First().Transacao.Nome,
+                             DataOperacao = total.First().DataDaOperacao,
+                             Total = total.Sum(c => c.Valor)
+                         };
+        var ganhos = _context.Financas
+                                    .Include(x => x.Categoria)
+                                    .Include(x => x.Transacao)
+                                    .Where(x => x.TransacaoId == "ganho")
+                                    .Sum(x => x.Valor);
+        var gastos = _context.Financas
+                                    .Include(x => x.Categoria)
+                                    .Include(x => x.Transacao)
+                                    .Where(x => x.TransacaoId == "gasto")
+                                    .Sum(x => x.Valor);
+
+        var diferenca = ganhos - gastos;
+
+        List<RegistrosFinanceiros> registros = new List<RegistrosFinanceiros>();
+        foreach (var resultado in resultados)
+        {
+            var registro = new RegistrosFinanceiros()
+            {
+                CategoriaNome = resultado.CategoriaNome,
+                TransacaoNome = resultado.TransacaoNome,
+                DataOperacao = resultado.DataOperacao.ToString("dd/MM/yyyy"),
+                ValorCategoria = resultado.Total.ToString("F"),
+                Ganhos = ganhos.ToString("F"),
+                Gastos = gastos.ToString("F"),
+                Diferenca = diferenca.ToString("F"),
+            };
+
+            registros.Add(registro);
+        }
+        return View(registros);
+    }
+
     [HttpPost]
     public IActionResult Filtrar(string[] filtro)
     {
@@ -92,5 +138,33 @@ public class HomeController : Controller
         _context.Remove(financa);
         _context.SaveChanges();
         return RedirectToAction("Index");
+    }
+
+    public IActionResult AdicionarCategoria()
+    {
+        var categoria = new Categoria { CategoriaId = "categoria" };
+
+        return View(categoria);
+    }
+
+    [HttpPost]
+    public IActionResult AdicionarCategoria(Categoria categoria)
+    {
+        if (ModelState.IsValid)
+        {
+            var categoriaBanco = new Categoria
+            {
+                CategoriaId = categoria.Nome.ToLower(),
+                Nome = categoria.Nome,
+            };
+            _context.Categorias.Add(categoriaBanco);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View(categoria);
+        }
     }
 }
